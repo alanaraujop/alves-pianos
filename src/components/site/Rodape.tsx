@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Instagram, MessageCircle, Phone } from "lucide-react";
+import { HREF_TELEFONE, linkWhatsApp } from "@/lib/contato";
 import { textStyle } from "@/lib/typography";
 import { Brand } from "./Brand";
 
@@ -10,8 +11,8 @@ import { Brand } from "./Brand";
  * carrega nome acessível próprio, já que o ícone sozinho não diz nada.
  */
 const ATALHOS = [
-  { Icon: Phone, href: "tel:+5521986823794", rotulo: "Ligar para a oficina" },
-  { Icon: MessageCircle, href: "https://wa.me/5521986823794", rotulo: "Falar no WhatsApp" },
+  { Icon: Phone, href: HREF_TELEFONE, rotulo: "Ligar para a oficina" },
+  { Icon: MessageCircle, href: linkWhatsApp(), rotulo: "Falar no WhatsApp" },
   { Icon: Instagram, href: "https://instagram.com/alvespianos", rotulo: "Instagram da oficina" },
 ];
 

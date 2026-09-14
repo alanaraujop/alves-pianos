@@ -1,4 +1,5 @@
 import { Clock, Instagram, MapPin, Phone } from 'lucide-react';
+import { HREF_TELEFONE, TELEFONE } from '@/lib/contato';
 import { textStyle } from '@/lib/typography';
 import { FormularioContato } from './FormularioContato';
 import { Eyebrow, SectionHeading, Shell } from './Shell';
@@ -22,9 +23,9 @@ const CONTATOS: {
 }[] = [
   {
     Icon: Phone,
-    texto: '(21) 98682-3794 · WhatsApp',
-    href: 'tel:+5521986823794',
-    rotulo: 'Ligar para (21) 98682-3794',
+    texto: `${TELEFONE.exibicao} · WhatsApp`,
+    href: HREF_TELEFONE,
+    rotulo: `Ligar para ${TELEFONE.exibicao}`,
   },
   {
     Icon: MapPin,
