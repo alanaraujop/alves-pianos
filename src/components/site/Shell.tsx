@@ -15,10 +15,18 @@ const TONE_CLASSES: Record<ShellTone, string> = {
   dark: "bg-gradient-ebony",
 };
 
-/** Full-bleed section wrapper with the site's standard container and vertical rhythm. */
+/**
+ * Full-bleed section wrapper with the site's standard container and vertical
+ * rhythm.
+ *
+ * O respiro é fluido (`px-gutter`/`py-section`): 16px de margem e 48px de
+ * ritmo vertical no celular, 24px e 96px no desktop. O `scroll-mt` segue a
+ * altura real do cabeçalho fixo em vez de um 88px chutado, senão a âncora
+ * para atrás da barra no celular, onde ela é mais baixa.
+ */
 export function Shell({ id, tone = "page", children }: ShellProps) {
   return (
-    <section id={id} className={`scroll-mt-[88px] px-6 py-9 ${TONE_CLASSES[tone]}`}>
+    <section id={id} className={`scroll-mt-header px-gutter py-section ${TONE_CLASSES[tone]}`}>
       <div className="mx-auto max-w-container-lg">{children}</div>
     </section>
   );

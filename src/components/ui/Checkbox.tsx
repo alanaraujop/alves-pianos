@@ -14,7 +14,7 @@ export function Checkbox({ label, checked = false, disabled = false, id, onChang
   return (
     <label
       htmlFor={uid}
-      className={`inline-flex items-start gap-3 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} ${className}`}
+      className={`inline-flex min-h-tap items-start gap-3 py-2 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} ${className}`}
     >
       <input
         id={uid}
@@ -28,7 +28,7 @@ export function Checkbox({ label, checked = false, disabled = false, id, onChang
       />
       <span
         aria-hidden="true"
-        className={`mt-0.5 flex h-[18px] w-[18px] flex-none items-center justify-center rounded-xs border transition-colors duration-fast ease-standard ${
+        className={`mt-0.5 flex h-[18px] w-[18px] flex-none items-center justify-center rounded-xs border transition-colors duration-fast ease-standard peer-focus-visible:shadow-focus ${
           checked ? "border-gold-500 bg-gold-400" : "border-border bg-surface-card shadow-inset"
         }`}
       >

@@ -12,14 +12,21 @@ export interface BrandProps {
  */
 export function Brand({ dark = true }: BrandProps) {
   return (
-    <span className="flex items-center gap-[10px]">
+    // O monograma e o nome encolhem um pouco no celular para dividir a barra
+    // com o botão de menu. `flex-none` evita que a marca seja a peça sacrificada
+    // quando o cabeçalho aperta — cabe inteira mesmo em 320px.
+    <span className="flex flex-none items-center gap-2 sm:gap-[10px]">
       <span
         aria-hidden="true"
-        className="flex h-9 w-9 items-center justify-center rounded-xs bg-gradient-gold font-display text-base text-wood-800"
+        className="flex h-8 w-8 flex-none items-center justify-center rounded-xs bg-gradient-gold font-display text-sm text-wood-800 sm:h-9 sm:w-9 sm:text-base"
       >
         AP
       </span>
-      <span className={`font-display text-[24px] leading-none tracking-[.02em] ${dark ? "text-gold-300" : "text-wood-600"}`}>
+      <span
+        className={`whitespace-nowrap font-display text-[20px] leading-none tracking-[.02em] sm:text-[24px] ${
+          dark ? "text-gold-300" : "text-wood-600"
+        }`}
+      >
         Alves Pianos
       </span>
     </span>

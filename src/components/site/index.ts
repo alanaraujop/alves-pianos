@@ -2,6 +2,7 @@ export * from "./Acervo";
 export * from "./AcervoCompleto";
 export * from "./Brand";
 export * from "./Contato";
+export * from "./FormularioContato";
 export * from "./Hero";
 export * from "./OrcamentoDialog";
 export * from "./PianoCard";

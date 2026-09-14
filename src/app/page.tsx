@@ -10,6 +10,11 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Primeiro alvo de tabulação da página: salta o cabeçalho inteiro.
+          Invisível até receber foco. */}
+      <a href="#conteudo" className="skip-link">
+        Pular para o conteúdo
+      </a>
       <div className="sticky top-0 z-30">
         <NavBar
           tone="dark"
@@ -27,11 +32,15 @@ export default function HomePage() {
           }
         />
       </div>
-      <Hero onOrcamento={() => setOrcamentoOpen(true)} />
-      <Servicos />
-      <Acervo />
-      <Sobre />
-      <Contato enviado={contatoEnviado} onEnviado={() => setContatoEnviado(true)} />
+      {/* Marco `main`: dá ao leitor de tela um atalho direto para o conteúdo,
+          que antes não existia em nenhuma das duas páginas. */}
+      <main id="conteudo">
+        <Hero onOrcamento={() => setOrcamentoOpen(true)} />
+        <Servicos />
+        <Acervo />
+        <Sobre />
+        <Contato enviado={contatoEnviado} onEnviado={() => setContatoEnviado(true)} />
+      </main>
       <Rodape />
       <OrcamentoDialog open={orcamentoOpen} onClose={() => setOrcamentoOpen(false)} />
     </>

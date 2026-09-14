@@ -1,3 +1,5 @@
+import type { ImagemId } from "./imagens";
+
 export type PianoTipo = "vertical" | "cauda" | "restaurar";
 export type PianoEstado = "Restaurado" | "Disponível" | "Em restauro";
 
@@ -7,6 +9,8 @@ export interface Piano {
   estado: PianoEstado;
   preco: string;
   descricao: string;
+  /** Foto do instrumento no registro `IMAGENS`. Ver o aviso em `imagens.ts`. */
+  imagem: ImagemId;
 }
 
 /**
@@ -15,12 +19,12 @@ export interface Piano {
  * acervo antes de qualquer publicação.
  */
 export const ACERVO: Piano[] = [
-  { nome: "Essenfelder 1962", tipo: "vertical", estado: "Restaurado", preco: "R$ 14.800", descricao: "Jacarandá, mecanismo revisado, cordas novas." },
-  { nome: "Fritz Dobbert 1978", tipo: "vertical", estado: "Disponível", preco: "R$ 8.400", descricao: "Estudo, teclado regulado, afinação inclusa." },
-  { nome: "Yamaha U1 1989", tipo: "vertical", estado: "Restaurado", preco: "R$ 22.000", descricao: "Clássico de estudo, som firme e teclado leve." },
-  { nome: "Schiedmayer 1911", tipo: "cauda", estado: "Em restauro", preco: "sob consulta", descricao: "Meia cauda alemã, tampo original em recuperação." },
-  { nome: "Steinway S 1954", tipo: "cauda", estado: "Restaurado", preco: "sob consulta", descricao: "Cauda curta, revisão completa de mecânica." },
-  { nome: "Antiga alemã s/ marca", tipo: "restaurar", estado: "Em restauro", preco: "R$ 4.200", descricao: "Peça para quem quer acompanhar o restauro." },
+  { nome: "Essenfelder 1962", tipo: "vertical", estado: "Restaurado", preco: "R$ 14.800", descricao: "Jacarandá, mecanismo revisado, cordas novas.", imagem: "piano-essenfelder" },
+  { nome: "Fritz Dobbert 1978", tipo: "vertical", estado: "Disponível", preco: "R$ 8.400", descricao: "Estudo, teclado regulado, afinação inclusa.", imagem: "piano-dobbert" },
+  { nome: "Yamaha U1 1989", tipo: "vertical", estado: "Restaurado", preco: "R$ 22.000", descricao: "Clássico de estudo, som firme e teclado leve.", imagem: "piano-yamaha" },
+  { nome: "Schiedmayer 1911", tipo: "cauda", estado: "Em restauro", preco: "sob consulta", descricao: "Meia cauda alemã, tampo original em recuperação.", imagem: "piano-schiedmayer" },
+  { nome: "Steinway S 1954", tipo: "cauda", estado: "Restaurado", preco: "sob consulta", descricao: "Cauda curta, revisão completa de mecânica.", imagem: "piano-steinway" },
+  { nome: "Antiga alemã s/ marca", tipo: "restaurar", estado: "Em restauro", preco: "R$ 4.200", descricao: "Peça para quem quer acompanhar o restauro.", imagem: "piano-antiga" },
 ];
 
 export const ACERVO_FILTROS: { value: "todos" | PianoTipo; label: string }[] = [

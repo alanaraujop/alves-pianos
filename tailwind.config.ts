@@ -10,6 +10,12 @@ const config: Config = {
   content: ["./src/**/*.{ts,tsx,mdx}", "./.storybook/preview.tsx"],
   theme: {
     extend: {
+      screens: {
+        /* Divisa entre "celular estreito" (iPhone SE, 360px) e o resto dos
+           aparelhos atuais (390–430px). Só é usada onde 30px de largura
+           decidem se um controle cabe na barra ou desce para o menu. */
+        xs: "420px",
+      },
       colors: {
         gold: {
           100: "var(--gold-100)",
@@ -133,6 +139,18 @@ const config: Config = {
         "9": "var(--space-9)",
         "10": "var(--space-10)",
         "11": "var(--space-11)",
+        /* Escalas fluidas: `px-gutter` e `py-section` substituem os valores
+           fixos nas seções, encolhendo sozinhos no celular. */
+        gutter: "var(--gutter)",
+        section: "var(--section-y)",
+        tap: "var(--tap-target)",
+        header: "var(--header-h)",
+      },
+      minHeight: {
+        tap: "var(--tap-target)",
+      },
+      minWidth: {
+        tap: "var(--tap-target)",
       },
       maxWidth: {
         "container-sm": "var(--container-sm)",
@@ -160,6 +178,8 @@ const config: Config = {
         lg: "var(--shadow-lg)",
         inset: "var(--shadow-inset)",
         "gold-focus": "var(--shadow-gold-focus)",
+        focus: "var(--focus-ring)",
+        "focus-on-dark": "var(--focus-ring-on-dark)",
       },
       backdropBlur: {
         veil: "10px",

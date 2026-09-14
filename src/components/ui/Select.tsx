@@ -17,6 +17,7 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
 export function Select({ label, hint, options = [], id, className = "", ...rest }: SelectProps) {
   const generatedId = useId();
   const uid = id ?? generatedId;
+  const messageId = `${uid}-msg`;
 
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
@@ -28,7 +29,8 @@ export function Select({ label, hint, options = [], id, className = "", ...rest 
       <div className="relative flex">
         <select
           id={uid}
-          className={`flex-1 appearance-none rounded-control border border-border bg-surface-card py-[11px] pl-3 pr-9 ${textStyle.body} text-ink-strong outline-none shadow-inset transition-[box-shadow,border-color] duration-fast ease-standard focus:border-gold-400 focus:shadow-gold-focus`}
+          aria-describedby={hint ? messageId : undefined}
+          className={`min-h-tap flex-1 appearance-none rounded-control border border-border bg-surface-card py-[11px] pl-3 pr-9 ${textStyle.body} text-ink-strong outline-none shadow-inset transition-[box-shadow,border-color] duration-fast ease-standard focus:border-gold-400 focus:shadow-gold-focus`}
           {...rest}
         >
           {options.map((option) => (
@@ -42,7 +44,11 @@ export function Select({ label, hint, options = [], id, className = "", ...rest 
           className="pointer-events-none absolute right-[14px] top-1/2 h-[7px] w-[7px] -translate-y-1/2 rotate-45 border-b border-r border-ink-muted"
         />
       </div>
-      {hint && <span className="text-xs text-ink-muted">{hint}</span>}
+      {hint && (
+        <span id={messageId} className="text-xs text-ink-muted">
+          {hint}
+        </span>
+      )}
     </div>
   );
 }

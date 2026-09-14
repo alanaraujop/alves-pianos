@@ -14,7 +14,7 @@ export function Switch({ label, checked = false, disabled = false, id, onChange,
   return (
     <label
       htmlFor={uid}
-      className={`inline-flex items-center gap-3 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} ${className}`}
+      className={`inline-flex min-h-tap items-center gap-3 py-2 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} ${className}`}
     >
       <input
         id={uid}
@@ -24,12 +24,12 @@ export function Switch({ label, checked = false, disabled = false, id, onChange,
         disabled={disabled}
         onChange={onChange}
         readOnly={!onChange}
-        className="sr-only"
+        className="peer sr-only"
         {...rest}
       />
       <span
         aria-hidden="true"
-        className={`flex h-[22px] w-10 items-center rounded-pill border p-0.5 transition-colors duration-fast ease-standard ${
+        className={`flex h-[22px] w-10 items-center rounded-pill border p-0.5 transition-colors duration-fast ease-standard peer-focus-visible:shadow-focus ${
           checked ? "justify-end border-gold-500 bg-gold-400" : "justify-start border-border bg-ivory-200"
         }`}
       >
