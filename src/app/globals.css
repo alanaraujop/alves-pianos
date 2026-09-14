@@ -1,0 +1,29 @@
+@import "../styles/tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--surface-page);
+    color: var(--text-body);
+    font-family: var(--font-sans);
+  }
+
+  a {
+    color: var(--text-link);
+  }
+
+  a:hover {
+    color: var(--text-link-hover);
+  }
+}
