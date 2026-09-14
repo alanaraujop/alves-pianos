@@ -11,12 +11,15 @@ export default function AcervoPage() {
 
   return (
     <>
+      <a href="#conteudo" className="skip-link">
+        Pular para o conteúdo
+      </a>
       <div className="sticky top-0 z-30">
         <NavBar
           tone="dark"
           active="/acervo"
           brand={
-            <Link href="/" className="no-underline">
+            <Link href="/" className="no-underline" aria-label="Alves Pianos — página inicial">
               <Brand />
             </Link>
           }
@@ -33,8 +36,10 @@ export default function AcervoPage() {
           }
         />
       </div>
-      <AcervoCompleto />
-      <Publique enviado={publicadoEnviado} onEnviado={() => setPublicadoEnviado(true)} />
+      <main id="conteudo">
+        <AcervoCompleto />
+        <Publique enviado={publicadoEnviado} onEnviado={() => setPublicadoEnviado(true)} />
+      </main>
       <Rodape />
       <OrcamentoDialog open={orcamentoOpen} onClose={() => setOrcamentoOpen(false)} />
     </>

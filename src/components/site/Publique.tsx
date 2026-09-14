@@ -18,7 +18,7 @@ const PASSOS: [string, string][] = [
 export function Publique({ enviado, onEnviado }: PubliqueProps) {
   return (
     <Shell id="publicar" tone="dark">
-      <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[1.05fr_.95fr]">
+      <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[1.05fr_.95fr] md:gap-8">
         <div>
           <Eyebrow dark>Anuncie no acervo</Eyebrow>
           <SectionHeading dark>Quem compra aqui confia no ouvido de quarenta anos</SectionHeading>
@@ -27,23 +27,33 @@ export function Publique({ enviado, onEnviado }: PubliqueProps) {
             entra na lista carrega junto a curadoria que construímos desde 1984. É por isso que os pianos daqui vendem
             bem.
           </p>
-          <div className="mb-6 flex flex-col gap-5">
+          {/* Lista ordenada de verdade: o leitor de tela anuncia "lista de 3
+              itens" e a posição de cada passo, o que uma pilha de `div` não
+              transmite. */}
+          <ol className="mb-6 flex list-none flex-col gap-5 p-0">
             {PASSOS.map(([titulo, descricao], index) => (
-              <div key={titulo} className="flex gap-4">
-                <span className="min-w-[44px] font-display text-2xl leading-none text-gold-400">0{index + 1}</span>
+              <li key={titulo} className="flex gap-3 sm:gap-4">
+                {/* `aria-hidden` porque "01", "02" lidos em voz alta não
+                    acrescentam nada: a ordem dos passos já vem da estrutura. */}
+                <span
+                  aria-hidden="true"
+                  className="w-9 flex-none font-display text-2xl leading-none text-gold-400 sm:w-11"
+                >
+                  0{index + 1}
+                </span>
                 <div>
                   <div className={`mb-1 ${textStyle.h3} text-ivory-100`}>{titulo}</div>
                   <div className={`${textStyle.small} text-ink-onDarkMuted`}>{descricao}</div>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
           <Card tone="ebony" eyebrow="O que garantimos" title="Laudo técnico e selo de avaliação">
             Se o piano não estiver em condições de entrar no acervo, dizemos na hora e explicamos o que falta. A taxa
             cobre a visita e o laudo.
           </Card>
         </div>
-        <div className="rounded-card border border-border-hairline bg-surface-card p-6 shadow-lg">
+        <div className="rounded-card border border-border-hairline bg-surface-card p-4 shadow-lg sm:p-6">
           {enviado ? (
             <Note tone="success" title="Recebemos o seu piano" icon={<Check size={18} strokeWidth={1.5} />}>
               Entramos em contato em até um dia útil para marcar a avaliação.
@@ -57,10 +67,17 @@ export function Publique({ enviado, onEnviado }: PubliqueProps) {
               }}
             >
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Input label="Nome" placeholder="Como podemos te chamar?" />
-                <Input label="Telefone" placeholder="(21) 90000-0000" />
+                <Input label="Nome" placeholder="Como podemos te chamar?" name="nome" autoComplete="name" />
+                <Input
+                  label="Telefone"
+                  placeholder="(21) 90000-0000"
+                  name="telefone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                />
               </div>
-              <Input label="Marca e ano" placeholder="Essenfelder, 1962" />
+              <Input label="Marca e ano" placeholder="Essenfelder, 1962" name="instrumento" />
               <Select
                 label="Tipo"
                 options={[

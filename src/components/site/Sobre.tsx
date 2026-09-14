@@ -1,12 +1,20 @@
-import { Card, Placeholder } from "@/components/ui";
+import { Card, Foto } from "@/components/ui";
 import { textStyle } from "@/lib/typography";
 import { Eyebrow, SectionHeading, Shell } from "./Shell";
 
 export function Sobre() {
   return (
     <Shell id="sobre" tone="dark">
-      <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[.9fr_1.1fr]">
-        <Placeholder tone="ebony" ratio="3 / 4" label="Retrato do Sr. Alves — a fornecer" />
+      <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[.9fr_1.1fr] md:gap-8">
+        {/* O recorte é 3/4 no desktop, mas empilhado no celular essa altura
+            ocupa quase uma tela inteira antes de qualquer texto. Ali ele vira
+             4/3 e centralizado, com largura limitada. */}
+        <Foto
+          id="sobre-bancada"
+          ratio="4 / 3"
+          sizes="(min-width: 768px) 450px, (min-width: 420px) 380px, 100vw"
+          className="mx-auto w-full max-w-[380px] md:max-w-none md:[--placeholder-ratio:3/4]"
+        />
         <div>
           <Eyebrow dark>Quem faz</Eyebrow>
           <SectionHeading dark>Quarenta anos de ouvido, uma bancada só</SectionHeading>
@@ -18,12 +26,14 @@ export function Sobre() {
             Já atendemos teatros, escolas de música, gravadoras e famílias que só querem o piano da avó tocando de
             novo. O cuidado é o mesmo nos dois casos.
           </p>
-          <div className="mb-6 flex items-center gap-4">
+          <div aria-hidden="true" className="mb-6 flex items-center gap-3 sm:gap-4">
             <span className="h-px flex-1 bg-gold-500" />
-            <span className="font-script text-[30px] leading-none text-gold-300">desde 1984</span>
+            <span className="whitespace-nowrap font-script text-[26px] leading-none text-gold-300 sm:text-[30px]">
+              desde 1984
+            </span>
             <span className="h-px flex-1 bg-gold-500" />
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Card tone="ebony" eyebrow="Depoimento" title="Teatro municipal">
               &ldquo;Afinação impecável na véspera do concerto. Chegou no horário e resolveu.&rdquo;
             </Card>

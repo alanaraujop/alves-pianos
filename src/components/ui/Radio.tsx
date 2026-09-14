@@ -14,7 +14,7 @@ export function Radio({ label, checked = false, disabled = false, id, onChange, 
   return (
     <label
       htmlFor={uid}
-      className={`inline-flex items-center gap-3 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} ${className}`}
+      className={`inline-flex min-h-tap items-center gap-3 py-2 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} ${className}`}
     >
       <input
         id={uid}
@@ -23,12 +23,12 @@ export function Radio({ label, checked = false, disabled = false, id, onChange, 
         disabled={disabled}
         onChange={onChange}
         readOnly={!onChange}
-        className="sr-only"
+        className="peer sr-only"
         {...rest}
       />
       <span
         aria-hidden="true"
-        className={`flex h-[18px] w-[18px] flex-none items-center justify-center rounded-pill border transition-colors duration-fast ease-standard ${
+        className={`flex h-[18px] w-[18px] flex-none items-center justify-center rounded-pill border transition-colors duration-fast ease-standard peer-focus-visible:shadow-focus ${
           checked ? "border-gold-500" : "border-border shadow-inset"
         } bg-surface-card`}
       >

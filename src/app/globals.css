@@ -11,12 +11,19 @@
 
   html {
     scroll-behavior: smooth;
+    /* Impede o Safari no iPhone de inflar o corpo do texto quando o
+       aparelho gira para paisagem — o tamanho passa a ser só o nosso. */
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     background: var(--surface-page);
     color: var(--text-body);
     font-family: var(--font-sans);
+    /* Rede de segurança contra rolagem horizontal: qualquer elemento que
+       estoure a largura da tela fica contido em vez de deslocar a página
+       inteira, o que no celular é o defeito de layout mais comum. */
+    overflow-x: hidden;
   }
 
   a {
@@ -25,5 +32,93 @@
 
   a:hover {
     color: var(--text-link-hover);
+  }
+
+  /* — Foco visível —
+     Padrão único para tudo que recebe foco, mas só no foco por teclado:
+     o toque e o clique não acendem o anel. Componentes que precisam de um
+     anel diferente (campos de formulário, botões sobre ébano) sobrescrevem
+     com `focus-visible:` nas próprias classes. */
+  :where(a, button, [role="button"], [role="tab"], summary, [tabindex]):focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-control);
+  }
+
+  /* Remove o flash cinza do toque no Android/iOS — o estado de toque de cada
+     controle já é dado pelo próprio componente. */
+  :where(a, button, [role="button"], label, input, select, textarea) {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Palavras longas (nomes de rua, e-mails) não furam a caixa no celular. */
+  :where(h1, h2, h3, p, li, dd, dt) {
+    overflow-wrap: break-word;
+  }
+
+  /* Mídia nunca ultrapassa o contêiner. */
+  :where(img, svg, video, canvas) {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  /* Link "pular para o conteúdo": fica fora da tela até receber foco, então
+     quem navega por teclado ou leitor de tela salta o cabeçalho inteiro em
+     vez de tabular pelos links de menu em cada página. */
+  .skip-link {
+    position: absolute;
+    left: var(--space-4);
+    top: var(--space-4);
+    z-index: 100;
+    /* Alvo de toque cheio: com o padding sozinho o link ficava com 42px. */
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-target);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-card);
+    color: var(--text-strong);
+    border: 1px solid var(--border-gold);
+    border-radius: var(--radius-control);
+    box-shadow: var(--shadow-md);
+    font: var(--type-label);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    text-decoration: none;
+    transform: translateY(calc(-100% - var(--space-6)));
+    transition: transform var(--duration-fast) var(--ease-out-soft);
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  /* Preenche a faixa segura de aparelhos com entalhe/barra inferior
+     (iPhone com Face ID) para que nada acionável fique sob o gesto de
+     início do sistema. */
+  .pb-safe {
+    padding-bottom: max(var(--space-5), env(safe-area-inset-bottom));
+  }
+}
+
+/* — Movimento reduzido —
+   Quem pediu menos animação no sistema recebe o site inteiro estático:
+   sem rolagem suave, sem transições de cor, sem os deslocamentos de hover
+   dos cartões. O que era animação vira troca imediata de estado. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

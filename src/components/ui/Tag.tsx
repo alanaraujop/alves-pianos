@@ -22,11 +22,15 @@ export function Tag({ selected = false, onClick, onRemove, children, className =
       type={onClick ? "button" : undefined}
       onClick={onClick}
       aria-pressed={onClick ? selected : undefined}
-      className={`inline-flex items-center gap-2 whitespace-nowrap rounded-pill border px-3 py-[6px] transition-colors duration-fast ease-standard ${textStyle.label} ${
+      className={`inline-flex items-center gap-2 whitespace-nowrap rounded-pill border px-4 transition-colors duration-fast ease-standard ${textStyle.label} ${
+        // Como filtro, a etiqueta é um controle e precisa do alvo de toque
+        // inteiro; como rótulo estático, mantém a altura compacta original.
+        onClick ? "min-h-tap cursor-pointer py-2" : "py-[6px]"
+      } ${
         selected
           ? "border-wood-600 bg-wood-600 text-ivory-100"
           : `border-border-hairline bg-ivory-100 text-ink-body ${onClick ? "hover:bg-ivory-200" : ""}`
-      } ${onClick ? "cursor-pointer" : ""} ${className}`}
+      } ${className}`}
       {...rest}
     >
       {children}
@@ -38,7 +42,7 @@ export function Tag({ selected = false, onClick, onRemove, children, className =
             onRemove();
           }}
           aria-label="Remover"
-          className="inline-flex leading-none text-sm text-current"
+          className="relative inline-flex leading-none text-sm text-current after:absolute after:left-1/2 after:top-1/2 after:h-tap after:w-tap after:-translate-x-1/2 after:-translate-y-1/2 after:content-['']"
         >
           ×
         </button>

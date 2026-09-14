@@ -18,10 +18,16 @@ export type ButtonProps = CommonProps &
   ({ href: string } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof CommonProps | "href">) |
   (CommonProps & { href?: undefined } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof CommonProps>);
 
+/**
+ * Cada tamanho carrega um `min-h` além do padding: o texto em caixa alta é
+ * pequeno por desenho (12–15px), e só o padding deixaria o `sm` com 28px de
+ * altura — metade do alvo de toque recomendado. O `min-h-tap` põe todos os
+ * três acima de 44px sem mudar a proporção visual no desktop.
+ */
 const SIZE_CLASSES: Record<ButtonSize, string> = {
-  sm: "px-4 py-2 text-2xs",
-  md: "px-6 py-3 text-xs",
-  lg: "px-[34px] py-4 text-sm",
+  sm: "min-h-tap px-4 py-2 text-2xs",
+  md: "min-h-tap px-5 py-3 text-xs sm:px-6",
+  lg: "min-h-[52px] px-6 py-4 text-sm sm:px-[34px]",
 };
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
@@ -29,7 +35,10 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   gold: "border-gold-500 bg-gold-400 text-wood-700 hover:border-gold-400 hover:bg-gold-300",
   secondary: "border-border-strong bg-transparent text-ink-strong hover:border-wood-500 hover:bg-ivory-100",
   ghost: "border-transparent bg-transparent text-ink-link normal-case tracking-normal hover:text-ink-linkHover",
-  onDark: "border-gold-500 bg-transparent text-gold-300 hover:border-gold-400 hover:bg-gold-400/[0.14]",
+  // Sobre ébano o anel de foco claro do padrão global some; estas duas usam o
+  // anel escuro para continuar visível.
+  onDark:
+    "border-gold-500 bg-transparent text-gold-300 hover:border-gold-400 hover:bg-gold-400/[0.14] focus-visible:shadow-focus-on-dark",
 };
 
 /** Primary call-to-action control. Renders as `<a>` when `href` is given, `<button>` otherwise. */
@@ -44,7 +53,10 @@ export function Button({
   href,
   ...rest
 }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-control border font-sans font-medium uppercase tracking-wide leading-none no-underline transition-colors duration-fast ease-standard active:translate-y-px disabled:pointer-events-none disabled:opacity-45 ${SIZE_CLASSES[size]} ${VARIANT_CLASSES[variant]} ${full ? "w-full" : ""} ${className}`;
+  // `text-balance` em vez de `whitespace-nowrap`: rótulos longos como
+  // "Compra e venda" agora quebram em duas linhas dentro do botão no celular
+  // em vez de esticar a linha inteira e provocar rolagem lateral.
+  const classes = `inline-flex items-center justify-center gap-2 text-balance rounded-control border font-sans font-medium uppercase tracking-wide no-underline transition-colors duration-fast ease-standard active:translate-y-px disabled:pointer-events-none disabled:opacity-45 ${SIZE_CLASSES[size]} ${VARIANT_CLASSES[variant]} ${full ? "w-full" : ""} ${className}`;
 
   if (href) {
     return (
