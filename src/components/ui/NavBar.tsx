@@ -87,7 +87,7 @@ export function NavBar({ brand, links = [], active, onNavigate, action, tone = "
   return (
     <header
       ref={headerRef}
-      className={`relative border-b px-gutter py-3 lg:py-4 ${
+      className={`relative border-b px-gutter py-2 lg:py-3 ${
         dark ? "border-border-onDark bg-gradient-ebony" : "border-border-hairline bg-surface-card"
       }`}
     >

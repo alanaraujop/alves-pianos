@@ -17,6 +17,15 @@ const config: Config = {
         xs: "420px",
       },
       colors: {
+        /* Cores exatas do manual da marca. Separadas da escala de interface
+           de propósito: servem ao que encosta na marca, não ao resto da UI. */
+        brand: {
+          wood: "var(--brand-wood)",
+          walnut: "var(--brand-walnut)",
+          beige: "var(--brand-beige)",
+          cream: "var(--brand-cream)",
+          gold: "var(--brand-gold)",
+        },
         gold: {
           100: "var(--gold-100)",
           200: "var(--gold-200)",
@@ -93,7 +102,6 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-display)"],
         sans: ["var(--font-sans)"],
-        script: ["var(--font-script)"],
       },
       fontSize: {
         "2xs": "var(--text-2xs)",
@@ -121,10 +129,10 @@ const config: Config = {
         caps: "var(--tracking-caps)",
       },
       fontWeight: {
-        light: "var(--weight-light)",
         regular: "var(--weight-regular)",
         medium: "var(--weight-medium)",
         semibold: "var(--weight-semibold)",
+        bold: "var(--weight-bold)",
       },
       spacing: {
         "0": "var(--space-0)",

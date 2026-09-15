@@ -1,34 +1,109 @@
+import Image from 'next/image';
+import { MARCA, type MarcaId } from '@/lib/marca';
+
+export type BrandVariant = 'empilhada' | 'horizontal' | 'simbolo';
+export type BrandTone = 'onDark' | 'onLight' | 'bege';
+
+/**
+ * Qual arquivo cada combinação de forma e fundo usa. A regra vem do manual:
+ * existe um arquivo pronto para cada fundo, e nunca se recolore a marca para
+ * cobrir um caso que falta.
+ *
+ * Sobre bege só a versão empilhada tem arquivo próprio (`dourado-marrom`); a
+ * deitada e o símbolo caem na versão de fundo claro, que é a que tem contraste
+ * sobre madeira clara.
+ *
+ * O símbolo inverte em relação ao que o nome sugere: em fundo escuro entra o
+ * `simbolo-claro`, de quadrado creme — é o mesmo ladrilho que o próprio
+ * desenhista usou dentro de `alves-pianos-horizontal-fundo-escuro`.
+ */
+const ARQUIVO: Record<BrandVariant, Record<BrandTone, MarcaId>> = {
+  empilhada: { onLight: 'principal', onDark: 'principalFundoEscuro', bege: 'principalBege' },
+  horizontal: { onLight: 'horizontal', onDark: 'horizontalFundoEscuro', bege: 'horizontal' },
+  simbolo: { onLight: 'simboloEscuro', onDark: 'simboloClaro', bege: 'simboloEscuro' },
+};
+
+/** Altura padrão de cada forma, em px, quando quem chama não pede outra. */
+const ALTURA_PADRAO: Record<BrandVariant, number> = {
+  empilhada: 96,
+  horizontal: 64,
+  simbolo: 44,
+};
+
 export interface BrandProps {
-  /** `false` renders the wordmark in wood tones, for light headers/footers. */
-  dark?: boolean;
+  variant?: BrandVariant;
+  /** Fundo em que a marca vai pousar — decide o arquivo, não um filtro CSS. */
+  tone?: BrandTone;
+  /** Altura renderizada em px. A largura sai da proporção do arquivo. */
+  height?: number;
+  /**
+   * A marca do cabeçalho está acima da dobra e precisa pintar de imediato,
+   * mas não leva `priority`: o preload dele sairia com `fetchPriority="high"`
+   * e disputaria banda com a foto do Hero, que é o LCP da página. `eager` só
+   * desliga a preguiça — o preload continua, em prioridade normal, e o arquivo
+   * é um SVG de poucos KB.
+   */
+  eager?: boolean;
+  className?: string;
 }
 
 /**
- * Wordmark used in the header and footer. The brand's only real asset today
- * is `assets/logo-original.jpg` from the design-system project — a vector
- * mark was never commissioned, so this renders a typographic monogram in
- * its place. Swap the `<span>` mark below for an `<img>` once a real logo
- * file lands in `public/assets/`.
+ * A marca, em SVG, servida direto de `public/images/logo/svg`.
+ *
+ * Os arquivos têm a tipografia convertida em curvas, então não dependem de
+ * fonte instalada. Vão com `unoptimized`: o otimizador do Next recusa SVG sem
+ * `dangerouslyAllowSVG`, e não há o que otimizar num vetor de poucos KB — o
+ * `width`/`height` continua sendo emitido, que é o que evita o salto de layout
+ * enquanto o arquivo carrega.
+ *
+ * O tamanho pedido é a altura, mas quem vai para o CSS é a largura
+ * correspondente, com a altura em `auto`. Assim o `max-width: 100%` que o
+ * `globals.css` põe em toda mídia encolhe a marca proporcionalmente num
+ * contêiner apertado, em vez de achatá-la — o manual proíbe justamente isso.
  */
-export function Brand({ dark = true }: BrandProps) {
+export function Brand({
+  variant = 'horizontal',
+  tone = 'onDark',
+  height,
+  eager = false,
+  className = '',
+}: BrandProps) {
+  const arquivo = MARCA[ARQUIVO[variant][tone]];
+  const alturaFinal = height ?? ALTURA_PADRAO[variant];
+  const largura = Math.round((arquivo.width / arquivo.height) * alturaFinal);
+
   return (
-    // O monograma e o nome encolhem um pouco no celular para dividir a barra
-    // com o botão de menu. `flex-none` evita que a marca seja a peça sacrificada
-    // quando o cabeçalho aperta — cabe inteira mesmo em 320px.
-    <span className="flex flex-none items-center gap-2 sm:gap-[10px]">
-      <span
-        aria-hidden="true"
-        className="flex h-8 w-8 flex-none items-center justify-center rounded-xs bg-gradient-gold font-display text-sm text-wood-800 sm:h-9 sm:w-9 sm:text-base"
-      >
-        AP
-      </span>
-      <span
-        className={`whitespace-nowrap font-display text-[20px] leading-none tracking-[.02em] sm:text-[24px] ${
-          dark ? "text-gold-300" : "text-wood-600"
-        }`}
-      >
-        Alves Pianos
-      </span>
+    <Image
+      src={arquivo.src}
+      alt="Alves Pianos"
+      width={largura}
+      height={alturaFinal}
+      loading={eager ? 'eager' : 'lazy'}
+      unoptimized
+      className={`block h-auto flex-none ${className}`}
+      style={{ width: largura }}
+    />
+  );
+}
+
+/**
+ * A marca como ela entra na barra de topo.
+ *
+ * Abaixo de 640px a assinatura deitada não cabe sem furar o tamanho mínimo do
+ * manual: o lettering ocupa 302 das 508 unidades do arquivo, então para os
+ * 110px mínimos de "ALVES / teclas / PIANOS" a peça inteira precisaria de
+ * ~185px de largura, ou seja 63px de altura — mais do que uma barra de celular
+ * comporta. Ali entra o símbolo, que o manual garante até 24px; os 44px usados
+ * aqui são folgados e ainda coincidem com o alvo mínimo de toque.
+ *
+ * De `sm` para cima volta a deitada a 64px de altura, o que dá 189px de
+ * largura e 112px de lettering — acima do mínimo, com margem.
+ */
+export function BrandCabecalho() {
+  return (
+    <span className="flex flex-none items-center">
+      <Brand variant="simbolo" tone="onDark" height={44} eager className="sm:hidden" />
+      <Brand variant="horizontal" tone="onDark" height={64} eager className="hidden sm:block" />
     </span>
   );
 }

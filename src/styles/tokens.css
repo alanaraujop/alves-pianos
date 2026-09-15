@@ -5,45 +5,64 @@
    elevation and motion. */
 
 /* tokens/fonts.css
-   SUBSTITUIÇÃO: a marca não possui arquivos de fonte próprios. Selecionadas no
-   Google Fonts por afinidade com a logo original (serifada clássica + geométrica
-   sem serifa). Se houver licença de fontes proprietárias, substituir aqui. */
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Pinyon+Script&display=swap");
+   As duas fontes da marca, como o manual as nomeia (docs/marca/LEIA-ME.md):
+   Libre Baskerville para títulos e Montserrat para textos e menus. Ambas
+   gratuitas para uso comercial. Só os cortes usados são pedidos — a Libre
+   Baskerville em 700 (títulos) e 400 itálico (o floreio "desde 1984"), a
+   Montserrat em 400/500 e 600 para o que precisa de mais peso.
+
+   A Libre Baskerville não tem 300 nem 600: onde havia peso leve, o papel
+   passou a ser cumprido pelo tamanho e pela cor, não por um corte que o
+   navegador teria de sintetizar. */
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600&display=swap");
 
 :root {
-  /* — Dourados (do gradiente da logo original) — */
-  --gold-100: #f6e7c3;
-  --gold-200: #ebd199;
-  --gold-300: #ddb560;
-  --gold-400: #c9922e; /* dourado da marca */
-  --gold-500: #a9761f;
-  --gold-600: #7e5514;
+  /* — Cores oficiais da marca (docs/marca/LEIA-ME.md) —
+     Os hexadecimais exatos do manual. Os SVGs da marca já os carregam dentro
+     do arquivo; estes tokens existem para o que encosta na marca (fundos de
+     selo, avatar, peças de papelaria) usar o valor certo em vez de o vizinho
+     mais próximo da escala de interface abaixo, que é construída a partir
+     destes mesmos cinco valores. */
+  --brand-wood: #3b2a22; /* marrom madeira */
+  --brand-walnut: #6b4a35; /* nogueira */
+  --brand-beige: #d8c5a5; /* bege envelhecido */
+  --brand-cream: #f4efe6; /* creme / marfim */
+  --brand-gold: #b08a45; /* dourado envelhecido */
 
-  /* — Terrosos — */
-  --clay-100: #f0ddd1;
-  --clay-200: #ddbba4;
-  --clay-300: #c08e6d;
-  --clay-400: #a9603f; /* terracota */
-  --clay-500: #84462c;
-  --clay-600: #5c2f1d;
+  /* — Dourados — rampa ancorada no dourado envelhecido da marca — */
+  --gold-100: #f3e7cd;
+  --gold-200: #e4d0a6;
+  --gold-300: #cdb077;
+  --gold-400: #b08a45; /* dourado envelhecido — cor oficial */
+  --gold-500: #8c6d34;
+  --gold-600: #6b5226;
 
-  /* — Madeira / jacarandá (base escura da logo) — */
-  --wood-100: #e4d6c8;
-  --wood-200: #bfa68b;
-  --wood-300: #8a6a4f;
-  --wood-400: #6b4a32;
-  --wood-500: #4a3122;
-  --wood-600: #2e1e15;
-  --wood-700: #1e1410;
-  --wood-800: #140d0a;
+  /* — Terrosos — apoio; não está no manual, reancorado para não brigar com
+       o marrom da marca (a terracota anterior puxava para o vermelho) — */
+  --clay-100: #f0e0d4;
+  --clay-200: #dcbfa8;
+  --clay-300: #bc9271;
+  --clay-400: #9c6844;
+  --clay-500: #7a4b2e;
+  --clay-600: #573320;
 
-  /* — Neutros quentes (marfim / feltro) — */
-  --ivory-50: #fbf7f0;
-  --ivory-100: #f4ede1;
-  --ivory-200: #e8decd;
-  --ivory-300: #d6c8b2;
-  --ivory-400: #b3a38c;
-  --ivory-500: #877964;
+  /* — Madeira — rampa entre a nogueira e o marrom madeira da marca — */
+  --wood-100: #e7dbd1;
+  --wood-200: #c8b3a1;
+  --wood-300: #9b7b64;
+  --wood-400: #6b4a35; /* nogueira — cor oficial */
+  --wood-500: #52382a;
+  --wood-600: #3b2a22; /* marrom madeira — cor oficial */
+  --wood-700: #2a1d17;
+  --wood-800: #1b120e;
+
+  /* — Neutros quentes — rampa entre o creme e o bege da marca — */
+  --ivory-50: #fbf8f2;
+  --ivory-100: #f4efe6; /* creme / marfim — cor oficial */
+  --ivory-200: #e9dfcb;
+  --ivory-300: #d8c5a5; /* bege envelhecido — cor oficial */
+  --ivory-400: #ad9974;
+  --ivory-500: #826f4f;
 
   /* — Verde feltro (apoio, raro) — */
   --felt-400: #5e6b52;
@@ -51,27 +70,29 @@
 
   /* — Semânticos: superfície — */
   --surface-page: var(--ivory-50);
-  --surface-card: #fffdf9;
+  --surface-card: #fffcf6;
   --surface-sunken: var(--ivory-100);
-  --surface-inverse: var(--wood-700);
+  --surface-inverse: var(--wood-600);
   --surface-accent: var(--gold-100);
 
-  /* — Semânticos: texto — */
-  --text-strong: var(--wood-700);
+  /* — Semânticos: texto —
+     Todos os pares conferidos contra o fundo em que aparecem: nenhum texto do
+     site fica abaixo de 4.5:1, e os traços e anéis de foco, abaixo de 3:1. */
+  --text-strong: var(--wood-600);
   --text-body: var(--wood-500);
-  --text-muted: #7a6552;
+  --text-muted: #75604f;
   --text-on-dark: var(--ivory-100);
-  --text-on-dark-muted: #c3ae97;
+  --text-on-dark-muted: #c9b69c;
   --text-accent: var(--gold-600);
   --text-link: var(--clay-500);
   --text-link-hover: var(--gold-600);
 
   /* — Semânticos: traço — */
-  --border-hairline: #e2d6c3;
-  --border-default: #cdbca3;
+  --border-hairline: #e6dccb;
+  --border-default: #cfbea2;
   --border-strong: var(--wood-400);
   --border-gold: var(--gold-400);
-  --border-on-dark: #4a3122;
+  --border-on-dark: #5c4432;
 
   /* — Estado — */
   --state-success: #5e6b52;
@@ -79,14 +100,16 @@
   --state-danger: #8e3b2a;
   --state-info: var(--wood-400);
 
-  /* — Gradiente da logo (usar apenas na marca e em filetes) — */
-  --gradient-gold: linear-gradient(135deg, #7e5514 0%, #c9922e 38%, #f0dfa8 60%, #c9922e 82%, #8a5c17 100%);
-  --gradient-ebony: linear-gradient(160deg, #2e1e15 0%, #140d0a 100%);
+  /* — Gradientes da marca (usar apenas na marca e em filetes) —
+     O ébano agora parte do próprio marrom madeira do quadrado da logo, então
+     a versão de fundo escuro encontra a mesma família de marrom em que foi
+     desenhada, em vez de um preto mais frio. */
+  --gradient-gold: linear-gradient(135deg, #6b5226 0%, #b08a45 38%, #e8d6ac 60%, #b08a45 82%, #7a5c2b 100%);
+  --gradient-ebony: linear-gradient(160deg, #3b2a22 0%, #1b120e 100%);
 
   /* tokens/typography.css */
-  --font-display: "Cormorant Garamond", "Georgia", serif; /* títulos e marca */
-  --font-sans: "Jost", "Futura", "Avenir Next", system-ui, sans-serif; /* interface e corpo */
-  --font-script: "Pinyon Script", cursive; /* assinatura, uso raro */
+  --font-display: "Libre Baskerville", "Georgia", "Times New Roman", serif; /* títulos */
+  --font-sans: "Montserrat", "Helvetica Neue", Arial, system-ui, sans-serif; /* textos e menus */
 
   /* escala tipográfica — razão 1.25, base 17px.
      Do `lg` para cima a escala é fluida: interpola entre o valor de celular
@@ -94,40 +117,54 @@
      `rem` de propósito — assim o zoom e o tamanho de fonte do sistema
      continuam valendo (WCAG 1.4.4), o que não aconteceria só com `vw`.
      Os tamanhos de leitura (2xs…md) não encolhem: 17px de corpo é o piso
-     confortável no celular e evita o zoom automático do iOS em campos. */
+     confortável no celular e evita o zoom automático do iOS em campos.
+
+     O topo da escala encolheu cerca de 25% junto com a troca de fonte. A
+     Libre Baskerville tem altura-de-x muito maior que a Cormorant Garamond
+     que estava aqui e só existe em peso cheio: no mesmo corpo em px ela
+     desenha uma letra bem maior, e a chamada do Hero a 68px passava da tela.
+     Os números abaixo são o tamanho aparente de antes, não o valor de antes. */
   --text-2xs: 12px;
   --text-xs: 13px;
   --text-sm: 15px;
   --text-md: 17px;
-  --text-lg: clamp(1.125rem, 0.37vw + 1.043rem, 1.3125rem); /* 18 → 21 */
-  --text-xl: clamp(1.3125rem, 0.61vw + 1.175rem, 1.625rem); /* 21 → 26 */
-  --text-2xl: clamp(1.5625rem, 0.98vw + 1.343rem, 2.0625rem); /* 25 → 33 */
-  --text-3xl: clamp(1.8125rem, 1.59vw + 1.456rem, 2.625rem); /* 29 → 42 */
-  --text-4xl: clamp(2.0625rem, 2.56vw + 1.486rem, 3.375rem); /* 33 → 54 */
-  --text-5xl: clamp(2.375rem, 3.66vw + 1.552rem, 4.25rem); /* 38 → 68 */
-  --text-6xl: clamp(2.75rem, 5.12vw + 1.598rem, 5.375rem); /* 44 → 86 */
+  --text-lg: clamp(1.125rem, 0.24vw + 1.07rem, 1.25rem); /* 18 → 20 */
+  --text-xl: clamp(1.1875rem, 0.37vw + 1.105rem, 1.375rem); /* 19 → 22 */
+  --text-2xl: clamp(1.3125rem, 0.61vw + 1.175rem, 1.625rem); /* 21 → 26 */
+  --text-3xl: clamp(1.5rem, 0.98vw + 1.281rem, 2rem); /* 24 → 32 */
+  --text-4xl: clamp(1.6875rem, 1.59vw + 1.331rem, 2.5rem); /* 27 → 40 */
+  --text-5xl: clamp(1.875rem, 2.44vw + 1.326rem, 3.125rem); /* 30 → 50 */
+  --text-6xl: clamp(2.125rem, 3.41vw + 1.357rem, 3.875rem); /* 34 → 62 */
 
-  --leading-tight: 1.08;
-  --leading-snug: 1.25;
-  --leading-normal: 1.55;
-  --leading-loose: 1.75;
+  /* Entrelinhas mais abertas que as anteriores: a Libre Baskerville tem
+     ascendentes e descendentes longos, e a 1.08 de antes as linhas de um
+     título de duas linhas se encostavam. A leitura em Montserrat também
+     ganhou respiro — a letra é mais larga que a Jost que estava aqui. */
+  --leading-tight: 1.18;
+  --leading-snug: 1.32;
+  --leading-normal: 1.6;
+  --leading-loose: 1.8;
 
-  --tracking-tight: -0.01em;
+  --tracking-tight: -0.015em;
   --tracking-normal: 0;
   --tracking-wide: 0.06em;
-  --tracking-caps: 0.16em;
+  /* 0.16em era o respiro certo para a Jost, estreita. A Montserrat já é larga:
+     no mesmo valor os rótulos em caixa alta do menu não cabiam na barra. */
+  --tracking-caps: 0.12em;
 
-  --weight-light: 300;
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
+  --weight-bold: 700; /* único peso de título — a Libre Baskerville Bold */
 
-  /* papéis semânticos (equivalentes ao shorthand `font` do kit original) */
-  --type-display: var(--weight-light) var(--text-5xl) / var(--leading-tight) var(--font-display);
-  --type-h1: var(--weight-regular) var(--text-4xl) / var(--leading-tight) var(--font-display);
-  --type-h2: var(--weight-regular) var(--text-3xl) / var(--leading-snug) var(--font-display);
-  --type-h3: var(--weight-medium) var(--text-xl) / var(--leading-snug) var(--font-display);
-  --type-lead: var(--weight-light) var(--text-lg) / var(--leading-normal) var(--font-sans);
+  /* papéis semânticos (equivalentes ao shorthand `font` do kit original).
+     Todo título vai em Libre Baskerville Bold, como o manual manda; o resto
+     é Montserrat Regular, com o Medium reservado a rótulos e menus. */
+  --type-display: var(--weight-bold) var(--text-5xl) / var(--leading-tight) var(--font-display);
+  --type-h1: var(--weight-bold) var(--text-4xl) / var(--leading-tight) var(--font-display);
+  --type-h2: var(--weight-bold) var(--text-3xl) / var(--leading-snug) var(--font-display);
+  --type-h3: var(--weight-bold) var(--text-xl) / var(--leading-snug) var(--font-display);
+  --type-lead: var(--weight-regular) var(--text-lg) / var(--leading-normal) var(--font-sans);
   --type-body: var(--weight-regular) var(--text-md) / var(--leading-normal) var(--font-sans);
   --type-small: var(--weight-regular) var(--text-sm) / var(--leading-normal) var(--font-sans);
   --type-label: var(--weight-medium) var(--text-xs) / 1.2 var(--font-sans);
@@ -160,8 +197,10 @@
   --tap-target: 44px;
 
   /* Altura do cabeçalho fixo — usada pelo `scroll-margin` das seções para
-     que a âncora não pare atrás da barra. Atualizada no breakpoint md. */
-  --header-h: 68px;
+     que a âncora não pare atrás da barra. Segue a marca, que é a peça mais
+     alta da faixa: 44px de símbolo no celular e 64px da assinatura deitada a
+     partir de `sm`, mais o respiro vertical da barra em cada breakpoint. */
+  --header-h: 60px;
   --container-sm: 640px;
   --container-md: 900px;
   --container-lg: 1180px;
@@ -183,17 +222,17 @@
 
   /* tokens/elevation.css — sombras baixas, quentes e difusas */
   --shadow-none: none;
-  --shadow-xs: 0 1px 1px rgba(46, 30, 21, 0.06);
-  --shadow-sm: 0 1px 2px rgba(46, 30, 21, 0.08), 0 1px 1px rgba(46, 30, 21, 0.04);
-  --shadow-md: 0 4px 12px rgba(46, 30, 21, 0.1), 0 1px 2px rgba(46, 30, 21, 0.06);
-  --shadow-lg: 0 12px 32px rgba(46, 30, 21, 0.14), 0 2px 6px rgba(46, 30, 21, 0.07);
-  --shadow-inset: inset 0 1px 2px rgba(46, 30, 21, 0.1);
-  --shadow-gold-focus: 0 0 0 3px rgba(201, 146, 46, 0.28);
+  --shadow-xs: 0 1px 1px rgba(59, 42, 34, 0.06);
+  --shadow-sm: 0 1px 2px rgba(59, 42, 34, 0.08), 0 1px 1px rgba(59, 42, 34, 0.04);
+  --shadow-md: 0 4px 12px rgba(59, 42, 34, 0.1), 0 1px 2px rgba(59, 42, 34, 0.06);
+  --shadow-lg: 0 12px 32px rgba(59, 42, 34, 0.14), 0 2px 6px rgba(59, 42, 34, 0.07);
+  --shadow-inset: inset 0 1px 2px rgba(59, 42, 34, 0.1);
+  --shadow-gold-focus: 0 0 0 3px rgba(176, 138, 69, 0.3);
   /* Anel de foco visível — dois anéis para sobreviver tanto sobre marfim
      quanto sobre ébano, sem depender da cor do fundo (WCAG 2.4.11). */
   --focus-ring: 0 0 0 2px var(--surface-page), 0 0 0 4px var(--gold-400);
   --focus-ring-on-dark: 0 0 0 2px var(--wood-800), 0 0 0 4px var(--gold-300);
-  --overlay-scrim: rgba(30, 20, 16, 0.62);
+  --overlay-scrim: rgba(27, 18, 14, 0.66);
   --blur-veil: saturate(115%) blur(10px);
 
   /* tokens/motion.css — sem bounce, como tampa de piano com amortecedor */
@@ -209,10 +248,17 @@
     border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
 }
 
-/* O cabeçalho fixo é mais alto no desktop (marca maior + linha de links na
-   mesma faixa), então a margem de rolagem das âncoras acompanha. */
+/* A partir de `sm` o símbolo dá lugar à assinatura deitada, que é mais alta;
+   no desktop a barra ainda ganha respiro vertical. A margem de rolagem das
+   âncoras acompanha os dois degraus, senão a seção para atrás da barra. */
+@media (min-width: 640px) {
+  :root {
+    --header-h: 80px;
+  }
+}
+
 @media (min-width: 1024px) {
   :root {
-    --header-h: 76px;
+    --header-h: 88px;
   }
 }

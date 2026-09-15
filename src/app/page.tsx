@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button, NavBar } from "@/components/ui";
-import { Acervo, Brand, Contato, Hero, OrcamentoDialog, Rodape, Servicos, Sobre } from "@/components/site";
+import { Acervo, BrandCabecalho, Contato, Hero, OrcamentoDialog, Rodape, Servicos, Sobre } from "@/components/site";
 
 export default function HomePage() {
   const [orcamentoOpen, setOrcamentoOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function HomePage() {
       <div className="sticky top-0 z-30">
         <NavBar
           tone="dark"
-          brand={<Brand />}
+          brand={<BrandCabecalho />}
           links={[
             { href: "#servicos", label: "Serviços" },
             { href: "/acervo", label: "Acervo" },

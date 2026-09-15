@@ -28,7 +28,7 @@ export function Sobre() {
           </p>
           <div aria-hidden="true" className="mb-6 flex items-center gap-3 sm:gap-4">
             <span className="h-px flex-1 bg-gold-500" />
-            <span className="whitespace-nowrap font-script text-[26px] leading-none text-gold-300 sm:text-[30px]">
+            <span className="whitespace-nowrap font-display italic text-[21px] leading-none text-gold-300 sm:text-[25px]">
               desde 1984
             </span>
             <span className="h-px flex-1 bg-gold-500" />

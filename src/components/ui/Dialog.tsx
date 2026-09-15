@@ -115,7 +115,7 @@ export function Dialog({ open, title, eyebrow, onClose, footer, children, width 
           <div className="min-w-0">
             {eyebrow && <div className={`mb-2 ${textStyle.overline} text-ink-accent`}>{eyebrow}</div>}
             {title && (
-              <h2 id={titleId} className="font-display font-regular text-xl leading-snug text-ink-strong">
+              <h2 id={titleId} className="font-display font-bold text-xl leading-snug text-ink-strong">
                 {title}
               </h2>
             )}

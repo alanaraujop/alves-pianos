@@ -20,9 +20,16 @@ export function Rodape() {
     <footer className="bg-wood-800 px-gutter pb-safe pt-7">
       {/* Empilha centralizado no celular e volta à fileira distribuída a partir
           de `md`: com `justify-between` e quebra de linha, as três peças caíam
-          desalinhadas no meio do caminho. */}
-      <div className="mx-auto flex max-w-container-lg flex-col items-center gap-5 text-center md:flex-row md:justify-between md:gap-6 md:text-left">
-        <Brand />
+          desalinhadas no meio do caminho.
+
+          Os espaçamentos são maiores do que o resto do site de propósito: o
+          manual pede em volta da marca uma margem livre de pelo menos a altura
+          da letra "A", que na versão empilhada a 96px vale cerca de 32px. */}
+      <div className="mx-auto flex max-w-container-lg flex-col items-center gap-6 text-center md:flex-row md:justify-between md:gap-7 md:text-left">
+        {/* Rodapé escuro: entra a versão empilhada de fundo escuro, que é o que
+            o manual reserva para fundo marrom/preto. A 96px de altura o
+            lettering fica com 168px de largura, bem acima dos 110px mínimos. */}
+        <Brand variant="empilhada" tone="onDark" height={96} />
         <ul className="flex list-none gap-2 p-0">
           {ATALHOS.map(({ Icon, href, rotulo }) => (
             <li key={href}>

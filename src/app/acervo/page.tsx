@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button, NavBar } from "@/components/ui";
-import { AcervoCompleto, Brand, OrcamentoDialog, Publique, Rodape } from "@/components/site";
+import { AcervoCompleto, BrandCabecalho, OrcamentoDialog, Publique, Rodape } from "@/components/site";
 
 export default function AcervoPage() {
   const [orcamentoOpen, setOrcamentoOpen] = useState(false);
@@ -20,7 +20,7 @@ export default function AcervoPage() {
           active="/acervo"
           brand={
             <Link href="/" className="no-underline" aria-label="Alves Pianos — página inicial">
-              <Brand />
+              <BrandCabecalho />
             </Link>
           }
           links={[

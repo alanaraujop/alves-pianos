@@ -1,0 +1,15 @@
+{
+  "name": "Alves Pianos",
+  "short_name": "Alves Pianos",
+  "description": "Oficina de restauração, afinação e venda de pianos no Rio de Janeiro.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4EFE6",
+  "theme_color": "#3B2A22",
+  "icons": [
+    { "src": "/images/logo/png/favicon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/images/logo/png/favicon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/images/logo/png/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
