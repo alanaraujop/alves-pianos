@@ -1,28 +1,23 @@
 /**
  * Registro das fotos do site.
  *
- * PROVISÓRIO: nenhuma destas imagens é da Alves Pianos. São fotos de acervo
- * livre (Openverse/Flickr/Wikimedia) escolhidas só para dimensionar e vestir o
- * layout — os instrumentos mostrados NÃO são os do acervo, e a oficina não é
- * a da marca. Substituir por fotografia própria antes de publicar; ao trocar,
- * apague também a entrada correspondente da página de créditos.
+ * PROVISÓRIO: as fotos aqui são temporárias e serão substituídas antes da
+ * publicação final. Parte já é fotografia da oficina; as entradas `piano-*` e
+ * `srv-venda-*` ainda são imagens de acervo de terceiros, e por isso não
+ * devem ir ao ar como estão. Ao trocar um arquivo, regenere `width`,
+ * `height` e `blurDataURL` e reescreva o `alt` para a foto nova.
  *
- * Cada entrada carrega largura e altura reais (o `next/image` precisa delas
- * para reservar o espaço e não empurrar o texto quando a foto chega) e um
- * `blurDataURL` de 16px embutido, que é o que aparece enquanto a imagem
- * carrega — no celular, em rede fraca, é a diferença entre um buraco branco e
- * uma mancha com a cor certa.
+ * `width`/`height` são as dimensões reais do arquivo. O `Foto` renderiza com
+ * `fill`, então quem manda na proporção da caixa é o CSS — estes números não
+ * chegam ao `next/image` hoje; ficam como registro do arquivo, que é o que
+ * denuncia uma foto trocada por outra de recorte diferente.
+ *
+ * O `blurDataURL` é um JPEG de 16px de altura embutido, o que aparece
+ * enquanto a imagem carrega — no celular, em rede fraca, é a diferença entre
+ * um buraco branco e uma mancha com a cor certa.
  *
  * Gerado a partir dos arquivos em `public/images/`.
  */
-
-export interface CreditoImagem {
-  titulo: string;
-  autor: string;
-  licenca: string;
-  licencaUrl: string;
-  origem: string;
-}
 
 export interface Imagem {
   src: string;
@@ -31,99 +26,56 @@ export interface Imagem {
   /** Texto alternativo descritivo, em português. */
   alt: string;
   blurDataURL: string;
-  credito: CreditoImagem;
 }
 
 export const IMAGENS = {
   'hero-oficina': {
     src: '/images/hero-oficina.jpg',
-    width: 1600,
-    height: 1200,
-    alt: 'Interior de um piano de cauda aberto: a placa dourada, os cravelhames e as cordas graves cruzadas',
+    width: 1440,
+    height: 1440,
+    alt: 'Piano de cauda aberto na oficina, com a mecânica e o teclado retirados e apoiados ao lado; ao centro, a placa dourada e as cordas à mostra',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABUDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAABAv/EACMQAAICAgECBwAAAAAAAAAAAAECAxEAIQQFURIxMkJhgdH/xAAVAQEBAAAAAAAAAAAAAAAAAAACA//EABcRAQEBAQAAAAAAAAAAAAAAAAERACH/2gAMAwEAAhEDEQA/ABcgPzY41dlSFRYWKz9nMbpicZQ1lz5im/M5kWXpfKKS2ISaJX2nuPjFkkR0dRNulPq7HJNGap0piQByzgTmOq149byw3KUGWkcihsBScsUuNDf/2Q==',
-    credito: {
-      titulo: 'Steinway grand piano interior',
-      autor: 'Kjethdubns',
-      licenca: 'CC0 1.0',
-      licencaUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
-      origem: 'https://commons.wikimedia.org/w/index.php?curid=20164563',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABADASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQID/8QAIRAAAgEDBAMBAAAAAAAAAAAAAQIDAAQRBRITISIxUYH/xAAUAQEAAAAAAAAAAAAAAAAAAAAD/8QAGBEAAwEBAAAAAAAAAAAAAAAAAQIRAAP/2gAMAwEAAhEDEQA/AB79YOQ8DO1upGYlyQv3ut20+1kQFY27XORIcAftI3UMdnpUohTHjtXr7VPacdpEh9bFU4o3JWAZOca7/9k=',
   },
   'sobre-bancada': {
-    src: '/images/sobre-bancada.png',
-    width: 1024,
-    height: 768,
-    alt: 'Detalhe do entalhe em madeira maciça na frente de um piano vertical antigo',
+    src: '/images/sobre-bancada.jpg',
+    width: 1271,
+    height: 1238,
+    alt: 'Fotografia antiga em preto e branco: um jovem técnico debruçado sobre a bancada, ajustando a mecânica de um piano',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABUDASEAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAMBAv/EACIQAAICAQIHAQAAAAAAAAAAAAECAAMRFDESIkNRYXGBkf/EABYBAQEBAAAAAAAAAAAAAAAAAAMFAv/EABkRAAMBAQEAAAAAAAAAAAAAAAABETEhQf/aAAwDAQACEQMRAD8AjdXXqcKgIXPySYKemsnKv0r2IwBexHpoiB2lbimps5gV4RnM5JDHcHzDVF3QoB3A/Im+htI//9k=',
-    credito: {
-      titulo: 'Straube 1901 Upright Piano',
-      autor: 'nwclassicyacht',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://www.flickr.com/photos/12559296@N03/12597627465',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAEDBf/EACAQAAIBBAIDAQAAAAAAAAAAAAECAwAEERIhQTEycWH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AvbNdPJs4CxKp218/achlNvmZ13OfRsjHRrKiu35AcI2uCzE5ahLh44CrbKxHYB/R8HNB/9k=',
   },
   'srv-afinacao-1': {
-    src: '/images/srv-afinacao-2.png',
-    width: 960,
-    height: 720,
-    alt: 'Ferramentas de afinação sobre a bancada: chave de afinação, feltro, cunhas e alicate',
+    src: '/images/srv-afinacao-2.jpg',
+    width: 1254,
+    height: 1254,
+    alt: 'Chave de afinação encaixada num cravelho de piano de cauda, entre as cordas e o teclado, em preto e branco',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABUDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMEAv/EACMQAAIBAgUFAQAAAAAAAAAAAAECAAMREhMhQXEEIjFhkaH/xAAWAQEBAQAAAAAAAAAAAAAAAAAEAgP/xAAZEQADAQEBAAAAAAAAAAAAAAAAARECAzH/2gAMAwEAAhEDEQA/AE1VdPFrezFmlVwhzl4TtmAH5NdWGzHFuDJXYbk3hsV+jemVmRjmFJlDIcF2PazX00ttzCRlgDp+wlwxP//Z',
-    credito: {
-      titulo: 'Piano tuning tools',
-      autor: 'Adjwilley',
-      licenca: 'CC BY-SA 3.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
-      origem: 'https://commons.wikimedia.org/w/index.php?curid=24449835',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABADASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQAE/8QAIRAAAgEEAgIDAAAAAAAAAAAAAQIDAAQRIQVhEjFBgfD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AMhtbVsh0C42XAyKrhYy5jSNAQM6A0O/31WK45KSdfAKscY9KvxSPG2kl40ccaGONjkZOz21B/9k=',
   },
   'srv-afinacao-2': {
     src: '/images/srv-afinacao-1.jpg',
-    width: 1000,
-    height: 667,
-    alt: 'Fileira de abafadores e cordas de um piano aberto, vistos de perfil',
+    width: 1440,
+    height: 1440,
+    alt: 'Dois técnicos trabalhando num piano vertical aberto sob a luz de um foco de bancada',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABgDASEAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAEDAv/EACUQAAICAQIEBwAAAAAAAAAAAAECAxEAEjEEISJBExRRYXGR8P/EABcBAAMBAAAAAAAAAAAAAAAAAAABBAP/xAAZEQACAwEAAAAAAAAAAAAAAAAAAQIREnH/2gAMAwEAAhEDEQA/AH5qELVZhnVhqbpXt6nfJ1G3RVKWUKOEMTLfhRqe3c/qwzfhN0IoEVtMCF5SpYWN65msqvDRx9Ux1saIUfHMN94kqG3pkeIlAobk7D2wwA//2Q==',
-    credito: {
-      titulo: 'Piano strings',
-      autor: 'kevin dooley',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://www.flickr.com/photos/12836528@N00/6399773133',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABADASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABAIF/8QAIBAAAgEDBQEBAAAAAAAAAAAAAQIDAAQREhMhIzEFUf/EABQBAQAAAAAAAAAAAAAAAAAAAAL/xAAXEQEBAQEAAAAAAAAAAAAAAAABABES/9oADAMBAAIRAxEAPwAMNzmUo5aORMhtw4HPnFI+pHHbxL2h3IBIA4rCEk8Tbi6ix9ZhqqmvHkfvAkH5nFF6XdkIF//Z',
   },
   'srv-restauro-1': {
     src: '/images/srv-restauro-1.jpg',
-    width: 1000,
-    height: 750,
-    alt: 'Martelos de feltro alinhados na mecânica de um piano aberto sobre a bancada',
+    width: 1440,
+    height: 1440,
+    alt: 'Técnico de boné e lanterna de cabeça ajustando a mecânica de um piano aberto, com as teclas à mostra',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABUDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAMBAgQF/8QAIxAAAgICAQIHAAAAAAAAAAAAAQIAAwQREhMxISIzQmJxkf/EABcBAAMBAAAAAAAAAAAAAAAAAAABAgP/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/AOMK6/cHWX6VGvV/QZoOdlsuiQw38pK52V47830GkNyFyjhLxpcMGOySIRWXbZeym1eZHbuNQhkLa//Z',
-    credito: {
-      titulo: 'Weinbach piano action hammers',
-      autor: 'Adrian Tync',
-      licenca: 'CC BY-SA 4.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
-      origem: 'https://commons.wikimedia.org/w/index.php?curid=115611843',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABADASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABAAB/8QAIhAAAgIBBAEFAAAAAAAAAAAAAQIDEQAEEiFBMSIyUXGx/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ANbQywxxoZjIhb0P7k+mB8YXXRLo5Q0N7a2tZHB6PHXWW12leMT2kYElBvPIr9xWrWN42MnPzZqwcD//2Q==',
   },
   'srv-restauro-2': {
     src: '/images/srv-restauro-2.jpg',
-    width: 1000,
-    height: 1000,
-    alt: 'Marchetaria de instrumentos em madeiras claras aplicada à tampa de um piano restaurado',
+    width: 1080,
+    height: 1088,
+    alt: 'Restaurador lixando a caixa de um piano de cauda desmontado, apoiado em cavaletes na oficina',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABADAREAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACAQAAICAgEFAQAAAAAAAAAAAAEDAhEABBIhMUFCYXL/xAAWAQEBAQAAAAAAAAAAAAAAAAADAAH/xAAZEQADAQEBAAAAAAAAAAAAAAAAASFBEQL/2gAMAwEAAhEDEQA/AMvWVGIHJZI+HvgtvB0kPsIUyyoGJq6Pg5ee6T5hPpoZIipLH7NYtDgHKZEm+EuvrmU2H//Z',
-    credito: {
-      titulo: 'Mandolin and tamborine inlay on the music box',
-      autor: 'guano',
-      licenca: 'CC BY-SA 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
-      origem: 'https://www.flickr.com/photos/97838323@N00/2397668780',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABADASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAABAX/xAAiEAACAQMDBQEAAAAAAAAAAAABAwIABBESIUETFCIxUWL/xAAUAQEAAAAAAAAAAAAAAAAAAAAC/8QAGREAAgMBAAAAAAAAAAAAAAAAAAECERIx/9oADAMBAAIRAxEAPwArrCS3FVmSJYyRLk4++qnut3IlpYTEx/VVUQcx56EdUTLXuT47YyOPtJdZBkB3AzPk0MtMeo1w/9k=',
   },
   'srv-venda-1': {
     src: '/images/srv-venda-1.jpg',
@@ -131,29 +83,15 @@ export const IMAGENS = {
     height: 750,
     alt: 'Piano de cauda de madeira escura, tampa levantada, pronto para entrega',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEA5gDmAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABUDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAADBf/EACIQAAIBAwQCAwAAAAAAAAAAAAECAwAEERIhMUEUUSKhwf/EABUBAQEAAAAAAAAAAAAAAAAAAAIB/8QAFxEBAQEBAAAAAAAAAAAAAAAAAAERcf/aAAwDAQACEQMRAD8A5VwfDnCuULpygY/e1GjlJlZshNR37xSbl7RrqUl2z2GUHfPv1WUTqScRRMAeiR+0OHJCCI2A0tnFVGLyB2MfxBPHNVJMf//Z',
-    credito: {
-      titulo: 'Everett Baby Grand Piano - front',
-      autor: 'Daryl Durand',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://commons.wikimedia.org/w/index.php?curid=25458387',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABYDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABAAF/8QAIhAAAgIBBAEFAAAAAAAAAAAAAQIDEQAEEiExQRMUIlGh/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgH/xAAYEQEBAAMAAAAAAAAAAAAAAAAAAREhMf/aAAwDAQACEQMRAD8AyNYPZThXKFlN7AxsjsXxhFmLah5RSbz55rGa19G+tlLSNu5sMm75X4P1h43QsQIomAPYJF/uCc0ckJPpOgp7rs+csM0jrKzRAIOtveWJMP/Z',
   },
   'srv-venda-2': {
     src: '/images/srv-venda-2.jpg',
     width: 1000,
-    height: 667,
-    alt: 'Teclado antigo em close: teclas de marfim gastas pelo uso e sustenidos de ébano',
+    height: 837,
+    alt: 'Piano vertical antigo em madeira avermelhada, com entalhes na frente e o teclado à mostra',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABgDAREAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIDBP/EACcQAAIBAwMACwAAAAAAAAAAAAECAwAEERITIQUxMkFRYZGSseHw/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABkRAAMBAQEAAAAAAAAAAAAAAAABERICYf/aAAwDAQACEQMRAD8AxiytNbAOpVIMlhJwz4zgH04qNOwcIwwxCN9zUGUqwXXguucMB59Rp2gNLawKQVlLqHKsVIOV7mA/ciigEXUEcAUxsTnPZFZ46fVpelBh0guzgWspYPqDEAceHzWmfSaEXTONIiX3fVTEiqf/2Q==',
-    credito: {
-      titulo: 'Antique wooden keys',
-      autor: 'quinet',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://www.flickr.com/photos/91994044@N00/6814988816',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABMDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMEBv/EACIQAAICAgIBBQEAAAAAAAAAAAECAxEABAUSISIxMmFy0f/EABcBAAMBAAAAAAAAAAAAAAAAAAEDBAX/xAAYEQEBAAMAAAAAAAAAAAAAAAABABESIf/aAAwDAQACEQMRAD8ATy0jryU6h2A7X4ahkcklgU7A/s/3HcoZ496QQFmDU5pQav7yRX3XuhKa9/TkIczamwGLU8ZGzcfCVHcFfld3hiNDRjk0oXcMzMvYnvXk4YdpCdv/2Q==',
   },
   'piano-essenfelder': {
     src: '/images/piano-essenfelder.jpg',
@@ -161,14 +99,7 @@ export const IMAGENS = {
     height: 837,
     alt: 'Piano vertical antigo em madeira avermelhada, com entalhes na frente e teclado à mostra',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABMDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMEBv/EACAQAAIBBAMAAwAAAAAAAAAAAAECEQADBAUTITESQXL/xAAXAQADAQAAAAAAAAAAAAAAAAABAwQF/8QAGBEBAQADAAAAAAAAAAAAAAAAAQAREiH/2gAMAwEAAhEDEQA/AFbS4w2V4ByBM9NH1UjvI6cz+zTtlzpmvwFmDAOYWYmplbNaYF0ge9VEHM2lsBi0mutscCyVHzBX2faKThYaPh2nZSxZZJLx2aKO0hO3/9k=',
-    credito: {
-      titulo: 'Straube 1901 Upright Piano',
-      autor: 'nwclassicyacht',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://www.flickr.com/photos/12559296@N03/12598062024',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABMDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMEBv/EACIQAAICAgIBBQEAAAAAAAAAAAECAxEABAUSISIxMmFy0f/EABcBAAMBAAAAAAAAAAAAAAAAAAEDBAX/xAAYEQEBAAMAAAAAAAAAAAAAAAABABESIf/aAAwDAQACEQMRAD8ATy0jryU6h2A7X4ahkcklgU7A/s/3HcoZ496QQFmDU5pQav7yRX3XuhKa9/TkIczamwGLU8ZGzcfCVHcFfld3hiNDRjk0oXcMzMvYnvXk4YdpCdv/2Q==',
   },
   'piano-dobbert': {
     src: '/images/piano-dobbert.jpg',
@@ -176,14 +107,7 @@ export const IMAGENS = {
     height: 667,
     alt: 'Piano vertical aberto: cordas cruzadas, mecânica e teclado visíveis de frente',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABgDAREAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAwQF/8QAIBAAAgICAgIDAAAAAAAAAAAAAQIREgADBFETITFBgf/EABcBAAMBAAAAAAAAAAAAAAAAAAABAgP/xAAaEQEBAQADAQAAAAAAAAAAAAABABESITFB/9oADAMBAAIRAxEAPwDK0rpElzrYE+i9vj8zNF8tByeNJWq+A9AWw4M+RRckIpEAL3WcoEoXZNGxSii6rA+1nE59qGa4UEryE99IcOo2k5O+83IY9xGMzulb/9k=',
-    credito: {
-      titulo: 'Details of an Open Upright Piano (51911275423)',
-      autor: 'Dejan Krsmanovic',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://commons.wikimedia.org/w/index.php?curid=134047220',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABgDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAABBf/EAB8QAAIBBQADAQAAAAAAAAAAAAECEgADBBEhFDFBUf/EABUBAQEAAAAAAAAAAAAAAAAAAAID/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDj2EsjZc2nBPC8vXz1SI2SsV8cn4BKiY91SiCaLoe2XdImFBK5Cd/ENTyK6HlhFI0qr3sd1VmXkT3Mhzo9jqqlAr//2Q==',
   },
   'piano-yamaha': {
     src: '/images/piano-yamaha.jpg',
@@ -191,14 +115,7 @@ export const IMAGENS = {
     height: 750,
     alt: 'Teclas brancas e sustenidos de um piano vertical em close, sob luz lateral',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABUDASEAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAIFA//EACcQAAEDAgQFBQAAAAAAAAAAAAEAAgMEERIxMuEFBhMUIRYiI0Fx/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AITqCpaQDGbluI2yCHUFQI2v6Z92Y+x+qNUoo6ryBA64zQhVX1BGQ4dvmLatk55ijJJ7YeW21bKoyl45HJh+ACwtq2QkH//Z',
-    credito: {
-      titulo: 'keys worn out with time',
-      autor: 'emsiekins.',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://www.flickr.com/photos/22633920@N05/3373718157',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABYDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAUCBv/EACgQAAEDAgQEBwAAAAAAAAAAAAEAAhEDBAUUITEGEjLhExYiJEFR0f/EABYBAQEBAAAAAAAAAAAAAAAAAAEAAv/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oADAMBAAIRAxEAPwDnjh10CxppGXCdNYQ4fcCi2p4Rg/Gsx9qv5lo+r227Y6uy0OJqMg5bZsdXZDVQ8ldAkC3eSEVl/ENJzGNy8Fo35h+IlV//2Q==',
   },
   'piano-schiedmayer': {
     src: '/images/piano-schiedmayer.jpg',
@@ -206,14 +123,7 @@ export const IMAGENS = {
     height: 669,
     alt: 'Interior de um piano de meia cauda aberto, com a placa dourada e o cravelhame',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABgDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAMBAgQF/8QAIRAAAgICAQQDAAAAAAAAAAAAAQIAEQMhEhMyQbEEYaH/xAAWAQEBAQAAAAAAAAAAAAAAAAADAAH/xAAWEQEBAQAAAAAAAAAAAAAAAAABABH/2gAMAwEAAhEDEQA/AOAQGcOy0DocRQNS/STIe5AftiI7DlUZWZggAXiNetxrZsLqVYA3VeP2CqS5tlHwKUv3AeUYGoSMz9K6YgXoa9iE0WsL/9k=',
-    credito: {
-      titulo: 'Inside a baby grand',
-      autor: 'Valerie Everett',
-      licenca: 'CC BY-SA 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
-      origem: 'https://www.flickr.com/photos/66742614@N00/321641474',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABgDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAMCBAb/xAAjEAACAgEDAwUAAAAAAAAAAAABAgMRABITIQVBYTEyUYGh/8QAFgEBAQEAAAAAAAAAAAAAAAAAAwAB/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQARAv/aAAwDAQACEQMRAD8AzjAM4kZaDcDQKU18ZPZjlPBS/L1j4JVErMwQKq6RY7+Occ80DqVdVbUBXoP3AVJs2pjpxCl/cB3RgawwmfZvSxAvgCrP2MM0eqwv/9k=',
   },
   'piano-steinway': {
     src: '/images/piano-steinway.jpg',
@@ -221,14 +131,7 @@ export const IMAGENS = {
     height: 773,
     alt: 'Piano de cauda do século XIX com estante ornamentada e castiçais de latão',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABUDAREAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQQFBv/EACQQAAEEAQMDBQAAAAAAAAAAAAECAwQRABIhMQUTFDJiscHR/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgED/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQACEf/aAAwDAQACEQMRAD8AzkaIp5IUQaJoYXQSMrNPdNdMfWHBSB6eKyGpOac4gtrKSODtjs+cqyfHiNoU7GQ5vV2b+cyNK8t9ZA7FybE0bQUEK9x/cR2CEhI7a1goaDYrgE/eU7RC/9k=',
-    credito: {
-      titulo: 'Streicher 1869 Grand Piano',
-      autor: 'kkmarais',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://www.flickr.com/photos/29946195@N07/9018484719',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABUDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQBAwUG/8QAJBAAAgICAQEJAAAAAAAAAAAAAQIDBAARIRIFExQyYWKRsdH/xAAVAQEBAAAAAAAAAAAAAAAAAAACA//EABkRAAIDAQAAAAAAAAAAAAAAAAARAQISIf/aAAwDAQACEQMRAD8A5erSadQxB0W0Mbn7LmNfrDjpQeTWgMuXw1OONpqyS862GbfxvJlvUu74oIQ3vb9ybZXK4YssZjkKkHg8euGM2RFI4KRCNdcKCT94Y2Can//Z',
   },
   'piano-antiga': {
     src: '/images/piano-antiga.jpg',
@@ -236,20 +139,8 @@ export const IMAGENS = {
     height: 671,
     alt: 'Piano antigo com a tampa aberta, teclas amareladas e madeira desgastada',
     blurDataURL:
-      'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAQABgDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMFBv/EACgQAAIBAwEFCQAAAAAAAAAAAAECAwAEEQUGEiExQRQVQlFhcYGRkv/EABUBAQEAAAAAAAAAAAAAAAAAAAID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAQBhESH/2gAMAwEAAhEDEQA/AExd5TaeEhgYJzDlxxHtmpc/a4GxJGUHrHVOeObTSgtmK9MZz9jzp1rtGgAjuo908iy8R8iojlZOWfeV38Y/OKKoavdxSXRaNImjKjG6OvWimPkE2//Z',
-    credito: {
-      titulo: 'Old piano',
-      autor: 'Thomas Beck Photo',
-      licenca: 'CC BY 2.0',
-      licencaUrl: 'https://creativecommons.org/licenses/by/2.0/',
-      origem: 'https://www.flickr.com/photos/39195673@N00/2542977658',
-    },
+      'data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAQABgDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAUDBAb/xAAlEAACAQIFAwUAAAAAAAAAAAABAgMABAUREiExBkFxFUNRgZL/xAAUAQEAAAAAAAAAAAAAAAAAAAAD/8QAGREBAQADAQAAAAAAAAAAAAAAAQARIWEx/9oADAMBAAIRAxEAPwCCL1SbDlSC3dU5Vy43HjOlFwbu3bKSPQM+8dNp47jCigtmZe2nMEHyPmrFp1PEVEd3FoPBYbr9igHk6YszJNI/uL+cqKZ43dwPdkxxxNEyKRoA3PfiikHXkadv/9k=',
   },
 } as const satisfies Record<string, Imagem>;
 
 export type ImagemId = keyof typeof IMAGENS;
-
-/** Lista para a página de créditos, em ordem alfabética de arquivo. */
-export const CREDITOS = Object.entries(IMAGENS)
-  .map(([id, imagem]) => ({ id, ...imagem.credito, alt: imagem.alt }))
-  .sort((a, b) => a.id.localeCompare(b.id));

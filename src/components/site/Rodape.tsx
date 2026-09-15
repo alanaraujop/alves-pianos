@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Instagram, MessageCircle, Phone } from "lucide-react";
 import { HREF_TELEFONE, linkWhatsApp } from "@/lib/contato";
 import { textStyle } from "@/lib/typography";
@@ -40,14 +39,6 @@ export function Rodape() {
         </ul>
         <div className={`${textStyle.small} text-ink-onDarkMuted`}>
           © 1984–2026 Alves Pianos · Rio de Janeiro
-          {/* Exigido pelas licenças Creative Commons das fotos em uso. */}
-          <br className="hidden md:block" />
-          <Link
-            href="/creditos"
-            className="relative inline-block text-ink-onDarkMuted underline underline-offset-2 after:absolute after:inset-x-0 after:top-1/2 after:h-11 after:-translate-y-1/2 after:content-[''] hover:text-gold-300"
-          >
-            Créditos das imagens
-          </Link>
         </div>
       </div>
     </footer>
